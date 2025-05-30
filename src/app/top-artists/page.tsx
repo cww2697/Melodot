@@ -47,11 +47,16 @@ export default function TopArtists() {
     };
 
 
+
     useEffect(() => {
-        if (session?.token?.access_token) {
-            fetchTopSongs(session?.token?.access_token);
-        }
-    }, [activeTab, session?.token?.access_token]);
+            // @ts-ignore
+            if (session?.token?.access_token) {
+                // @ts-ignore
+                fetchTopSongs(session?.token?.access_token);
+            }
+        },
+        // @ts-ignore
+        [activeTab, session?.token?.access_token]);
 
 
     useEffect(() => {

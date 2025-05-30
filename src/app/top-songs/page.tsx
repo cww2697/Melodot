@@ -48,9 +48,12 @@ export default function TopSongs() {
 
 
     useEffect(() => {
+        // @ts-ignore
         if (session?.token?.access_token) {
+            // @ts-ignore
             fetchTopSongs(session?.token?.access_token);
         }
+        // @ts-ignore
     }, [activeTab, session?.token?.access_token]);
 
 

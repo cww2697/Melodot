@@ -17,8 +17,11 @@ export default function Recommend() {
     const [selectedArtists, setSelectedArtists] = useState<string[]>([]);
 
     useEffect(() => {
+        // @ts-ignore
         if (session?.token?.access_token) {
+            // @ts-ignore
             fetchTopTracks(session.token.access_token);
+            // @ts-ignore
             fetchTopArtists(session.token.access_token);
         }
     }, [session]);
@@ -85,7 +88,7 @@ export default function Recommend() {
             <div className="bg-white rounded-lg shadow-md w-3/4 p-6 flex flex-col justify-center items-center">
                 <div className="flex justify-center pb-10">
                     <h1 className="text-3xl font-bold text-gray-900">
-                        Let's get some recommendations!
+                        Let&#39;s get some recommendations!
                     </h1>
                 </div>
 
