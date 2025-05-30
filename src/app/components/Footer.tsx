@@ -1,8 +1,9 @@
+'use client'
 import Image from "next/image";
 
-const Footer = () => {
+export default function Footer() {
     return (
-        <footer className="bg-gray-900 text-gray-400 text-center py-4 mt-8 flex flex-col items-center fixed bottom-0 w-full">
+        <footer className="bg-gray-900 text-gray-400 text-center py-4 mt-8 flex flex-col items-center w-full relative">
             <Image
                 src="/Spotify_Full_Logo_RGB_White.png"
                 alt="Spotify Logo"
@@ -12,6 +13,4 @@ const Footer = () => {
             />
         </footer>
     );
-};
-
-export default Footer;
+}

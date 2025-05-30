@@ -24,7 +24,7 @@ export default function TopSongs() {
         const cacheTimestamp = localStorage.getItem(`${cacheKey}_timestamp`);
         const currentTime = Date.now();
 
-        if (cachedData && cacheTimestamp && currentTime - Number(cacheTimestamp) < 300000) {
+        if (cachedData && cacheTimestamp && currentTime - Number(cacheTimestamp) < 3600) {
             setSongs(JSON.parse(cachedData)); // Use cached data
             return;
         }

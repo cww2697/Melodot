@@ -1,14 +1,33 @@
 'use client'
 import {signIn, signOut, useSession} from "next-auth/react";
 import Image from "next/image";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import DropdownLink from "@/app/components/Nav/DropdownLink";
 import NavLink from "@/app/components/Nav/NavLink";
+
+const useTokenValidation = (session: any) => {
+    useEffect(() => {
+        if (!session?.token?.expTime) return;
+
+        const checkExpiration = () => {
+            const currentTime = Date.now();
+            if (currentTime >= session.token.expTime) {
+                signOut();
+            }
+        };
+
+        const timer = setTimeout(checkExpiration, 5000);
+
+        return () => clearTimeout(timer);
+    }, [session?.token?.expTime]);
+};
 
 const TopNav = () => {
     const { data: session } = useSession();
     const [openSongsDropdown, setOpenSongsDropdown] = useState<string | null>(null);
     const [openArtistsDropdown, setOpenArtistsDropdown] = useState<string | null>(null);
+
+    useTokenValidation(session);
 
     return (
         <nav className="bg-gray-800 text-white py-3 px-6 flex justify-between items-center">

@@ -33,7 +33,7 @@ export default function RootLayout({
           <AuthProvider>
               <div className="flex flex-col min-h-screen">
                   <TopNav />
-                  <main className="flex-grow pb-40">{children}</main>
+                  {children}
                   <Footer />
               </div>
           </AuthProvider>

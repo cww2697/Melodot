@@ -15,6 +15,7 @@ const options: NextAuthOptions = {
         async jwt({ token, account}) {
             if (account) {
                 token.access_token = account.access_token;
+                token.expTime = Date.now()+3600000;
             }
             return token;
         },

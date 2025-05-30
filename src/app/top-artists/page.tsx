@@ -24,7 +24,7 @@ export default function TopArtists() {
         const cacheTimestamp = localStorage.getItem(`${cacheKey}_timestamp`);
         const currentTime = Date.now();
 
-        if (cachedData && cacheTimestamp && currentTime - Number(cacheTimestamp) < 300000) {
+        if (cachedData && cacheTimestamp && currentTime - Number(cacheTimestamp) < 3600) {
             setArtists(JSON.parse(cachedData)); // Use cached data
             return;
         }

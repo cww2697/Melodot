@@ -31,11 +31,11 @@ const DropdownLink = ({ title, options, links, isOpen, setOpen }: {
                 {title}
             </button>
             {isOpen && (
-                <ul className="absolute left-0 mt-2 w-40 bg-gray-700 rounded-md shadow-lg">
+                <ul className="absolute left-0 mt-2 w-40 bg-gray-700 rounded-md shadow-lg z-50 ">
                     {options.map((option, index) => (
                         <li
                             key={index}
-                            className="px-4 py-2 hover:bg-gray-600 cursor-pointer"
+                            className="px-4 py-2 hover:bg-gray-600 rounded-md cursor-pointer"
                             onClick={() => window.location.href = links[index]}
                         >
                             {option}
