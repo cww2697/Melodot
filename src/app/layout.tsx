@@ -34,7 +34,6 @@ export default function RootLayout({
               <div className="flex flex-col min-h-screen">
                   <TopNav />
                   {children}
-                  <Footer />
               </div>
           </AuthProvider>
       </body>

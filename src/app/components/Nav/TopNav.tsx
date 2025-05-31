@@ -30,7 +30,7 @@ const TopNav = () => {
     useTokenValidation(session);
 
     return (
-        <nav className="bg-gray-800 text-white py-3 px-6 flex justify-between items-center">
+        <nav className="bg-gray-800 text-white py-3 px-6 flex justify-between items-center" style={{ height: '64px' }}>
             <div className="text-xl font-bold">Dot</div>
             {session && (
                 <div className="flex space-x-6">

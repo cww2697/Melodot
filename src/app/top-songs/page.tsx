@@ -8,7 +8,7 @@ const tabNames = ['All Time', 'Last 6 Months', 'Last Month'] as const;
 type TabName = typeof tabNames[number];
 
 export default function TopSongs() {
-    const { data: session, status } = useSession(); // Get session status
+    const { data: session, status } = useSession();
     const [activeTab, setActiveTab] = useState<TabName>('All Time');
     const [songs, setSongs] = useState([]);
     const [lastFetchedTime, setLastFetchedTime] = useState<number | null>(null);
