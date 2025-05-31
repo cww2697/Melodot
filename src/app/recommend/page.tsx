@@ -7,7 +7,7 @@ import { ClipLoader } from "react-spinners";
 import { MultiSelect } from "@/app/components/form/MultiSelect";
 import { motion, AnimatePresence } from "framer-motion";
 import {useRouter} from "next/navigation";
-import WarningBanner from "@/app/banners/WarningBanner";
+import WarningBanner from "@/app/components/banners/WarningBanner";
 
 export default function Recommend() {
     const { data: session, status } = useSession();
