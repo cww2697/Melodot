@@ -13,25 +13,40 @@ interface SingleSelectProps {
     onDropdownClose?: () => void;
 }
 
-const SingleSelect: React.FC<SingleSelectProps> = ({ label, options, selectedValue, onChange, onDropdownClose }) => {
-    const [selectedLabel, setSelectedLabel] = useState(selectedValue || label);
+const SingleSelect: React.FC<SingleSelectProps> = ({
+                                                       label,
+                                                       options,
+                                                       selectedValue,
+                                                       onChange,
+                                                       onDropdownClose,
+                                                   }) => {
+    const [selectedLabel, setSelectedLabel] = useState<string>(
+        selectedValue ? options.find((opt) => opt.value === selectedValue)?.label || label : label
+    );
     const [isOpen, setIsOpen] = useState(false);
-    const dropdownRef = useRef<HTMLDivElement>(null); // Ref for dropdown container
+    const dropdownRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (selectedValue) {
+            const opt = options.find((opt) => opt.value === selectedValue);
+            setSelectedLabel(opt ? opt.label : label);
+        } else {
+            setSelectedLabel(label);
+        }
+    }, [selectedValue, options, label]);
 
     const handleSelection = (option: Option) => {
         setSelectedLabel(option.label);
         setIsOpen(false);
-        onDropdownClose?.(); // ✅ Trigger closing event
-        if (onChange) {
-            onChange(option.value);
-        }
+        onDropdownClose?.();
+        onChange?.(option.value);
     };
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
                 setIsOpen(false);
-                onDropdownClose?.(); // ✅ Ensure it triggers on outside click
+                onDropdownClose?.();
             }
         };
 
@@ -39,13 +54,13 @@ const SingleSelect: React.FC<SingleSelectProps> = ({ label, options, selectedVal
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, []);
+    }, [onDropdownClose]);
 
     return (
         <div className="relative inline-block w-64" ref={dropdownRef}>
             <button
-                onClick={() => setIsOpen((prev) => !prev)}
-                className="w-full p-2 border bg-white rounded-md shadow-sm text-left text-gray-900"
+                onClick={() => setIsOpen(!isOpen)}
+                className="w-full p-2 border-gray-300 bg-white rounded-md shadow-sm text-left text-gray-900"
             >
                 {selectedLabel}
             </button>

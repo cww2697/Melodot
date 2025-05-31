@@ -1,7 +1,7 @@
 'use client'
-import {signIn, signOut, useSession} from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
-import {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import DropdownLink from "@/app/components/Nav/DropdownLink";
 import NavLink from "@/app/components/Nav/NavLink";
 
@@ -23,16 +23,30 @@ const useTokenValidation = (session: any) => {
 };
 
 const TopNav = () => {
-    const { data: session } = useSession();
+    const { data: session, status } = useSession();
     const [openSongsDropdown, setOpenSongsDropdown] = useState<string | null>(null);
     const [openArtistsDropdown, setOpenArtistsDropdown] = useState<string | null>(null);
 
     useTokenValidation(session);
 
     return (
-        <nav className="bg-gray-800 text-white py-3 px-6 flex justify-between items-center">
-            <div className="text-xl font-bold">Dot</div>
-            {session && (
+        <nav
+            className="bg-gray-800 text-white py-3 px-6 flex justify-between items-center"
+            style={{ height: '64px' }}
+        >
+            <div className="text-xl font-bold">
+                <Image
+                    src="/melodot_logo.png"
+                    alt="Melodot Logo"
+                    width={50}
+                    height={50}
+                />
+            </div>
+
+            {status === "loading" ? (
+                <div className="flex space-x-6">
+                </div>
+            ) : session ? (
                 <div className="flex space-x-6">
                     <DropdownLink
                         title="Top Songs"
@@ -50,12 +64,13 @@ const TopNav = () => {
                     />
                     <NavLink
                         route="/recommend"
-                        title="Get Recommendations" />
+                        title="Get Recommendations"
+                    />
                 </div>
+            ) : null}
 
-            )}
             <div className="flex items-center space-x-4">
-                {session ? (
+                {status === "loading" ? null : session ? (
                     <>
                         <button
                             onClick={() => signOut()}
@@ -84,4 +99,4 @@ const TopNav = () => {
     );
 };
 
-export default TopNav;
+export default React.memo(TopNav);

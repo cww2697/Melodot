@@ -2,13 +2,13 @@
 import { useState, useEffect } from 'react';
 import { useSession } from "next-auth/react";
 import SongCard from "@/app/components/SongCard/SongCard";
-import { FaSpinner } from "react-icons/fa"; // Import spinner icon
+import { FaSpinner } from "react-icons/fa";
 
 const tabNames = ['All Time', 'Last 6 Months', 'Last Month'] as const;
 type TabName = typeof tabNames[number];
 
 export default function TopSongs() {
-    const { data: session, status } = useSession(); // Get session status
+    const { data: session, status } = useSession();
     const [activeTab, setActiveTab] = useState<TabName>('All Time');
     const [songs, setSongs] = useState([]);
     const [lastFetchedTime, setLastFetchedTime] = useState<number | null>(null);
@@ -25,7 +25,7 @@ export default function TopSongs() {
         const currentTime = Date.now();
 
         if (cachedData && cacheTimestamp && currentTime - Number(cacheTimestamp) < 3600) {
-            setSongs(JSON.parse(cachedData)); // Use cached data
+            setSongs(JSON.parse(cachedData));
             return;
         }
 
@@ -85,7 +85,7 @@ export default function TopSongs() {
                                     setActiveTab(tab);
                                     window.location.hash = tab.toLowerCase().replace(/\s/g, '-');
                                 }}
-                                className={`px-4 py-2 ${activeTab === tab ? 'font-bold border-b-2 border-blue-500' : 'text-gray-500'}`}
+                                className={`px-4 py-2 ${activeTab === tab ? 'font-bold border-b-2 border-[#f35a4b]' : 'text-gray-500'}`}
                             >
                                 {tab}
                             </button>
@@ -103,7 +103,7 @@ export default function TopSongs() {
                                             title={song.name}
                                             album={song.album.name}
                                             artist={song.artists[0]?.name}
-                                            spotifyUrl={song.external_urls.spotify}
+                                            spotifyUrl={song.uri}
                                         />
                                     ))}
                                 </div>
