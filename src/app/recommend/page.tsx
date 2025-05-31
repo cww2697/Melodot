@@ -7,6 +7,7 @@ import { ClipLoader } from "react-spinners";
 import { MultiSelect } from "@/app/components/form/MultiSelect";
 import { motion, AnimatePresence } from "framer-motion";
 import {useRouter} from "next/navigation";
+import WarningBanner from "@/app/banners/WarningBanner";
 
 export default function Recommend() {
     const { data: session, status } = useSession();
@@ -162,6 +163,7 @@ export default function Recommend() {
     return (
         <div className="flex justify-center items-center min-h-[calc(100vh-64px)]">
             <div className="bg-gray-100 rounded-lg shadow-md w-3/4 p-6 flex flex-col justify-center items-center">
+                <WarningBanner text="Spotify has deprecated the Get Recommendations API. Although this page remains functional, generating recommendation playlists is no longer supported."/>
                 <div className="flex justify-center pb-10">
                     <h1 className="text-3xl font-bold text-gray-900">
                         So, what kind of music are you feeling today?
@@ -344,7 +346,8 @@ export default function Recommend() {
 
                             {showSubmitButton && (
                                 <button
-                                    className="px-6 py-3 bg-[#f35a4b] text-white rounded-lg hover:bg-[#db5144] transition"
+                                    disabled
+                                    className="px-6 py-3 bg-[#f35a4b] text-white rounded-lg hover:bg-[#db5144] transition disabled:opacity-50 disabled:cursor-not-allowed"
                                     onClick={handleSubmit}
                                 >
                                     Submit
