@@ -7,21 +7,14 @@ import { ClipLoader } from "react-spinners";
 export default function Results() {
     const { data: session, status } = useSession();
     const searchParams = useSearchParams();
-
-    // Local state for parsed query parameters:
     const [selectedOption, setSelectedOption] = useState("");
     const [selectedSongs, setSelectedSongs] = useState<string[]>([]);
     const [selectedArtists, setSelectedArtists] = useState<string[]>([]);
-
-    // Loading states: one for query parsing and one for recommendations fetching.
     const [isQueryLoading, setIsQueryLoading] = useState(true);
     const [isRecLoading, setIsRecLoading] = useState(true);
-
-    // State for error messages and recommendations:
     const [recError, setRecError] = useState("");
     const [recommendations, setRecommendations] = useState<any[]>([]);
 
-    // First useEffect: Parse query parameters.
     useEffect(() => {
         try {
             const option = searchParams.get("selectedOption") || "";
@@ -36,10 +29,8 @@ export default function Results() {
             setSelectedSongs(songs);
             setSelectedArtists(artists);
 
-            // If missing required parameters, set an error.
             if (option === "" && (songs.length === 0 || artists.length === 0)) {
                 setRecError("An error occurred. Please try again.");
-                // Mark both query and recommendations as finished.
                 setIsQueryLoading(false);
                 setIsRecLoading(false);
                 return;

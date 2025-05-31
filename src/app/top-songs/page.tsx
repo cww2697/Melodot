@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useSession } from "next-auth/react";
 import SongCard from "@/app/components/SongCard/SongCard";
-import { FaSpinner } from "react-icons/fa"; // Import spinner icon
+import { FaSpinner } from "react-icons/fa";
 
 const tabNames = ['All Time', 'Last 6 Months', 'Last Month'] as const;
 type TabName = typeof tabNames[number];
@@ -25,7 +25,7 @@ export default function TopSongs() {
         const currentTime = Date.now();
 
         if (cachedData && cacheTimestamp && currentTime - Number(cacheTimestamp) < 3600) {
-            setSongs(JSON.parse(cachedData)); // Use cached data
+            setSongs(JSON.parse(cachedData));
             return;
         }
 

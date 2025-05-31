@@ -2,13 +2,13 @@
 import { useState, useEffect } from 'react';
 import { useSession } from "next-auth/react";
 import { FaSpinner } from "react-icons/fa";
-import ArtistCard from "@/app/components/ArtistCard/ArtistCard"; // Import spinner icon
+import ArtistCard from "@/app/components/ArtistCard/ArtistCard";
 
 const tabNames = ['All Time', 'Last 6 Months', 'Last Month'] as const;
 type TabName = typeof tabNames[number];
 
 export default function TopArtists() {
-    const { data: session, status } = useSession(); // Get session status
+    const { data: session, status } = useSession();
     const [activeTab, setActiveTab] = useState<TabName>('All Time');
     const [artists, setArtists] = useState([]);
     const [lastFetchedTime, setLastFetchedTime] = useState<number | null>(null);
@@ -25,7 +25,7 @@ export default function TopArtists() {
         const currentTime = Date.now();
 
         if (cachedData && cacheTimestamp && currentTime - Number(cacheTimestamp) < 3600) {
-            setArtists(JSON.parse(cachedData)); // Use cached data
+            setArtists(JSON.parse(cachedData));
             return;
         }
 

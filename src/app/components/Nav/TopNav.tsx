@@ -43,10 +43,8 @@ const TopNav = () => {
                 />
             </div>
 
-            {/* Only render the dropdowns after session loading is done */}
             {status === "loading" ? (
                 <div className="flex space-x-6">
-                    {/* Optionally render a placeholder/skeleton here */}
                 </div>
             ) : session ? (
                 <div className="flex space-x-6">
@@ -72,7 +70,6 @@ const TopNav = () => {
             ) : null}
 
             <div className="flex items-center space-x-4">
-                {/* Render nothing until we know the session status */}
                 {status === "loading" ? null : session ? (
                     <>
                         <button

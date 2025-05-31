@@ -20,14 +20,12 @@ const SingleSelect: React.FC<SingleSelectProps> = ({
                                                        onChange,
                                                        onDropdownClose,
                                                    }) => {
-    // Initialize the label based on the selectedValue (if any) or fall back to the default label.
     const [selectedLabel, setSelectedLabel] = useState<string>(
         selectedValue ? options.find((opt) => opt.value === selectedValue)?.label || label : label
     );
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
-    // This effect updates the displayed label whenever the selectedValue prop changes.
     useEffect(() => {
         if (selectedValue) {
             const opt = options.find((opt) => opt.value === selectedValue);
