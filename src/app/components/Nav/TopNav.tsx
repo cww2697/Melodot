@@ -31,7 +31,14 @@ const TopNav = () => {
 
     return (
         <nav className="bg-gray-800 text-white py-3 px-6 flex justify-between items-center" style={{ height: '64px' }}>
-            <div className="text-xl font-bold">Dot</div>
+            <div className="text-xl font-bold">
+                <Image
+                    src="/melodot_logo.png"
+                    alt="Melodot Logo"
+                    width={50}
+                    height={50}
+                />
+            </div>
             {session && (
                 <div className="flex space-x-6">
                     <DropdownLink
