@@ -85,7 +85,7 @@ export default function TopSongs() {
                                     setActiveTab(tab);
                                     window.location.hash = tab.toLowerCase().replace(/\s/g, '-');
                                 }}
-                                className={`px-4 py-2 ${activeTab === tab ? 'font-bold border-b-2 border-blue-500' : 'text-gray-500'}`}
+                                className={`px-4 py-2 ${activeTab === tab ? 'font-bold border-b-2 border-[#f35a4b]' : 'text-gray-500'}`}
                             >
                                 {tab}
                             </button>
@@ -103,7 +103,7 @@ export default function TopSongs() {
                                             title={song.name}
                                             album={song.album.name}
                                             artist={song.artists[0]?.name}
-                                            spotifyUrl={song.external_urls.spotify}
+                                            spotifyUrl={song.uri}
                                         />
                                     ))}
                                 </div>

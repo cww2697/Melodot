@@ -62,7 +62,7 @@ const SingleSelect: React.FC<SingleSelectProps> = ({
         <div className="relative inline-block w-64" ref={dropdownRef}>
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="w-full p-2 border bg-white rounded-md shadow-sm text-left text-gray-900"
+                className="w-full p-2 border-gray-300 bg-white rounded-md shadow-sm text-left text-gray-900"
             >
                 {selectedLabel}
             </button>

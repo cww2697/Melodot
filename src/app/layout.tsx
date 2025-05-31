@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "@/app/AuthProvider";
 import TopNav from "@/app/components/Nav/TopNav";
-import Footer from "@/app/components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Dot for Spotify",
+  title: "Melodot",
   description: "Spotify playback and statistics.",
 };
 
@@ -33,7 +32,9 @@ export default function RootLayout({
           <AuthProvider>
               <div className="flex flex-col min-h-screen">
                   <TopNav />
-                  {children}
+                  <div className="bg-gray-100 dark:bg-gray-900 min-h-[calc(100vh-64px)]">
+                      {children}
+                  </div>
               </div>
           </AuthProvider>
       </body>

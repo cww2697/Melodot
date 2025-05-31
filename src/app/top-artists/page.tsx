@@ -67,7 +67,7 @@ export default function TopArtists() {
 
     if (status === 'loading') {
         return (<div className="flex justify-center items-center h-screen">
-                <FaSpinner className="text-blue-500 text-4xl animate-spin" />
+                <FaSpinner className="text-[#f35a4b] text-4xl animate-spin" />
             </div>
         );
     }
@@ -87,7 +87,7 @@ export default function TopArtists() {
                                     setActiveTab(tab);
                                     window.location.hash = tab.toLowerCase().replace(/\s/g, '-');
                                 }}
-                                className={`px-4 py-2 ${activeTab === tab ? 'font-bold border-b-2 border-blue-500' : 'text-gray-500'}`}
+                                className={`px-4 py-2 ${activeTab === tab ? 'font-bold border-b-2 border-[#f35a4b]' : 'text-gray-500'}`}
                             >
                                 {tab}
                             </button>
@@ -103,7 +103,7 @@ export default function TopArtists() {
                                             rank={i+1}
                                             artistArt={artist.images[0]?.url}
                                             artistName={artist.name}
-                                            spotifyUrl={artist.external_urls.spotify}
+                                            spotifyUrl={artist.uri}
                                         />
                                     ))}
                                 </div>

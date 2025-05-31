@@ -6,7 +6,7 @@ import { Option, SingleSelect } from "@/app/components/form/SingleSelect";
 import { ClipLoader } from "react-spinners";
 import { MultiSelect } from "@/app/components/form/MultiSelect";
 import { motion, AnimatePresence } from "framer-motion";
-import {FaSpinner} from "react-icons/fa";
+import {useRouter} from "next/navigation";
 
 export default function Recommend() {
     const { data: session, status } = useSession();
@@ -19,6 +19,7 @@ export default function Recommend() {
     const [selectedArtists, setSelectedArtists] = useState<string[]>([]);
     const [editSongs, setEditSongs] = useState(false);
     const [editArtists, setEditArtists] = useState(false);
+    const router = useRouter();
 
     useEffect(() => {
         // @ts-ignore
@@ -131,15 +132,25 @@ export default function Recommend() {
         return displayed + (moreCount > 0 ? `, +${moreCount} more` : "");
     };
 
+    const handleSubmit = () => {
+        const queryParams = new URLSearchParams({
+            selectedOption,
+            selectedSongs: JSON.stringify(selectedSongs),
+            selectedArtists: JSON.stringify(selectedArtists),
+        }).toString();
+
+        router.push(`/recommend/results?${queryParams}`);
+    };
+
     if (status !== 'authenticated') {
         return (
             <div className="flex justify-center items-center min-h-[calc(100vh-64px)]">
-                <div className="bg-white rounded-lg shadow-md w-3/4 p-6 flex flex-col justify-center items-center">
+                <div className="bg-gray-100 rounded-lg shadow-md w-3/4 p-6 flex flex-col justify-center items-center">
                     <h1 className="text-3xl text-gray-900 font-bold mb-4">So, what kind of music are you feeling today</h1>
                     <p className="text-gray-900">Please sign in to view your Spotify recommendations.</p>
                     <button
                         onClick={() => signIn()}
-                        className="mt-4 px-4 py-2 bg-blue-600 text-white rounded"
+                        className="mt-4 px-4 py-2 bg-[#f35a4b] text-white rounded"
                     >
                         Sign In
                     </button>
@@ -150,7 +161,7 @@ export default function Recommend() {
 
     return (
         <div className="flex justify-center items-center min-h-[calc(100vh-64px)]">
-            <div className="bg-white rounded-lg shadow-md w-3/4 p-6 flex flex-col justify-center items-center">
+            <div className="bg-gray-100 rounded-lg shadow-md w-3/4 p-6 flex flex-col justify-center items-center">
                 <div className="flex justify-center pb-10">
                     <h1 className="text-3xl font-bold text-gray-900">
                         So, what kind of music are you feeling today?
@@ -158,7 +169,7 @@ export default function Recommend() {
                 </div>
 
                 {(!songOptions || !artistOptions) ? (
-                    <ClipLoader size={50} color={"#123abc"} loading={true} />
+                    <ClipLoader size={50} color={"#f35a4b"} loading={true} />
                 ) : (
                     <>
                         <div className="flex flex-col items-center gap-4">
@@ -174,7 +185,7 @@ export default function Recommend() {
                                     >
                                         I'll fetch recommendations based on{" "}
                                         <span
-                                            className="font-bold text-blue-600 cursor-pointer"
+                                            className="font-bold text-[#f35a4b] cursor-pointer"
                                             onClick={() => {
                                                 setSelectedOption("");
                                                 setShowSecondQuestion(false);
@@ -233,7 +244,7 @@ export default function Recommend() {
                                         >
                                             {selectedSongs.length === 1 ? "With the song " : "With the songs "}
                                             <span
-                                                className="font-bold text-blue-600 cursor-pointer"
+                                                className="font-bold text-[#f35a4b] cursor-pointer"
                                                 onClick={() => setEditSongs(true)}
                                             >
                                                 {getSongsSummary()}
@@ -283,7 +294,7 @@ export default function Recommend() {
                                         >
                                             {selectedArtists.length === 1 ? "With the artist " : "With the artists "}
                                             <span
-                                                className="font-bold text-blue-600 cursor-pointer"
+                                                className="font-bold text-[#f35a4b] cursor-pointer"
                                                 onClick={() => setEditArtists(true)}
                                             >
                                                 {getArtistsSummary()}
@@ -332,7 +343,10 @@ export default function Recommend() {
                             </button>
 
                             {showSubmitButton && (
-                                <button className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                                <button
+                                    className="px-6 py-3 bg-[#f35a4b] text-white rounded-lg hover:bg-[#db5144] transition"
+                                    onClick={handleSubmit}
+                                >
                                     Submit
                                 </button>
                             )}
